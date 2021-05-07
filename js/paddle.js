@@ -1,15 +1,15 @@
+import clamp from "./utils.js"
+
 export default class Paddle extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, keymap){
+    constructor(scene, x, y, texture, keymap) {
         super(scene, x, y, texture);
 
         this.scene = scene;
         this.setScale(15, 15);
 
         this.setAngle(90);
-
         //this.isMoving = false;
-
-        this.direction = 0;
+        this.direction = 1;
         this.velocity = 5;
         this.keymap = keymap;
 
@@ -18,20 +18,18 @@ export default class Paddle extends Phaser.GameObjects.Sprite {
 
     init() {
         this.scene.input.keyboard.on('keydown', e => {
-            console.log("premi...");
             this.startMoving(e);
         });
-        this.scene.input.keyboard.on('keyup', e => {
-            console.log("larguei...");
+        this.scene.input.keyboard.on('keypu', e => {
             this.stopMoving(e);
         });
     }
 
-    setKeyMap(keymap){
+    setKeymap(keymap) {
         this.keymap = keymap;
     }
 
-    startMoving(event){
+    startMoving(event) {
         //this.isMoving = true;
         switch(event.keyCode) {
             case this.keymap.up:
@@ -43,27 +41,26 @@ export default class Paddle extends Phaser.GameObjects.Sprite {
         }
     }
 
-    stopMoving(event){
+    stopMoving(event) {
         //this.isMoving = false;
         this.direction = 0;
     }
 
     update(time) {
-        //if(this.isMoving) {
-            this.y += this.direction * this.velocity;
+        
+        this.y += this.direction * this.velocity;
 
-            // if(this.y <= this.halfSize){
+            // if(this.y <= this.halfSize)
+            //{
             //     this.y = this.halfSize;
-            // } else if (this.y >= this.scene.game.config.height - this.halfSize){
+            // } else if (this.y >= this.scene.game.config.height - this.halfSize) {
             //     this.y = this.scene.game.config.height - this.halfSize;
             // }
 
-            this.y = clamp(this.y, 
+        this.y = clamp(this.y, 
                 this.halfSize,
-                this.y = this.scene.game.config.height - this.halfSize);
+                this.scene.game.config.height - this.halfSize);
 
-
-            //this.scene.game.config.height
-        //}
     }
+
 }

@@ -7,7 +7,7 @@ const config = {
     parent: 'game-canvas',
     scene: [MainScene],
     backgroundColor: '#000',
-    pixelArt: true,
+    pixelArt: true
 }
 
 new Phaser.Game(config);
